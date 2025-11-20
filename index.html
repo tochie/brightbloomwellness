@@ -295,29 +295,83 @@
         }
 
         .about-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .about-content h2 {
             color: #ff6b35;
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content .credentials {
-            font-size: 1.1rem;
-            color: #666;
             margin-bottom: 2rem;
-            font-weight: 600;
+            text-align: center;
         }
 
-        .about-content p {
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            text-align: left;
+        }
+
+        .about-text p {
             margin-bottom: 1.5rem;
             color: #555;
             line-height: 1.8;
-            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .about-image-container {
+            text-align: right;
+        }
+
+        .provider-image {
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            margin-left: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .provider-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect fill="%23f0f0f0" width="400" height="500"/><text x="50%25" y="50%25" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="18" fill="%23999">Provider Photo</text></svg>') center/cover;
+            opacity: 0.3;
+        }
+
+        .provider-name {
+            margin-top: 1.5rem;
+            text-align: right;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .provider-name .credentials {
+            display: block;
+            color: #ff6b35;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
         }
 
         .about-focus {
@@ -587,6 +641,23 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image-container {
+                text-align: center;
+            }
+
+            .provider-image {
+                margin: 0 auto;
+            }
+
+            .provider-name {
+                text-align: center;
+            }
         }
 
         hr {
@@ -757,9 +828,21 @@
             <div class="container">
                 <div class="about-content">
                     <h2>Meet Your Provider</h2>
-                    <p class="credentials">I'm Obi Eke, MSN, APRN, FNP-C</p>
-                    <p>A Family Nurse Practitioner passionate about postpartum care, women's health, and holistic wellness.</p>
-                    <p>With years of clinical experience in primary care and women's health, I created Bright Bloom Wellness to fill the gap mothers often face after delivery — when they are discharged early, overwhelmed at home, and expected to recover without support.</p>
+                    
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <p>A Family Nurse Practitioner passionate about postpartum care, women's health, and holistic wellness.</p>
+                            <p>With years of clinical experience in primary care and women's health, I created Bright Bloom Wellness to fill the gap mothers often face after delivery — when they are discharged early, overwhelmed at home, and expected to recover without support.</p>
+                        </div>
+                        
+                        <div class="about-image-container">
+                            <div class="provider-image"></div>
+                            <div class="provider-name">
+                                Obioma Eke-Okoro
+                                <span class="credentials">MSN, APRN, FNP-BC</span>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="about-focus">
                         <h3>I provide compassionate, culturally attuned postpartum care with a focus on:</h3>
@@ -774,8 +857,8 @@
 
                     <div class="divider">⸻</div>
                     
-                    <p style="font-size: 1.2rem; font-weight: 600; color: #ff6b35;">You don't have to do postpartum alone.</p>
-                    <p style="font-size: 1.1rem;">I'm here to walk with you every step of the way.</p>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: #ff6b35; text-align: center;">You don't have to do postpartum alone.</p>
+                    <p style="font-size: 1.1rem; text-align: center;">I'm here to walk with you every step of the way.</p>
                 </div>
             </div>
         </section>
