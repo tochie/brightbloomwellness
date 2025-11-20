@@ -45,9 +45,9 @@
 
         .c-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
+            position: relative;
         }
 
         .c-header__logo {
@@ -71,6 +71,12 @@
             color: white;
             font-size: 0.8rem;
             font-weight: 600;
+        }
+
+        .c-header__menu {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .c-header__menu ul {
@@ -724,6 +730,11 @@
                 gap: 1rem;
             }
 
+            .c-header__menu {
+                position: static;
+                transform: none;
+            }
+
             .c-header__menu ul {
                 flex-direction: column;
                 gap: 1rem;
@@ -765,7 +776,6 @@
                         <ul>
                             <li><a href="#services">Services</a></li>
                             <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
                     <div class="c-header__button">
@@ -952,45 +962,43 @@
         <!-- Services Section -->
         <div class="c-text u-mg u-mg--sm" id="services">
             <div class="container container--pd">
-                <div class="row">
-                    <div class="c-section-heading">
-                        <h2 class="c-section-heading__title">What We Offer</h2>
-                        <hr class="u-border u-border--orange">
+                <div class="c-section-heading">
+                    <h2 class="c-section-heading__title">What We Offer</h2>
+                    <hr class="u-border u-border--orange">
+                </div>
+                <div class="services-compact">
+                    <div class="service-card">
+                        <h3>Postpartum In-Home Care</h3>
+                        <p class="service-location">DFW Only — Virtual in TX, NM, UT, AZ, NV</p>
+                        <ul>
+                            <li>In-home postpartum checkups (BP, bleeding, incision checks, edema, vitals)</li>
+                            <li>C-section incision monitoring</li>
+                            <li>Breastfeeding support + referrals if needed</li>
+                            <li>Newborn care education</li>
+                            <li>Postpartum mental health screening</li>
+                            <li>Nutrition guidance for healing and milk supply</li>
+                        </ul>
                     </div>
-                    <div class="services-compact">
-                        <div class="service-card">
-                            <h3>Postpartum In-Home Care</h3>
-                            <p class="service-location">DFW Only — Virtual in TX, NM, UT, AZ, NV</p>
-                            <ul>
-                                <li>In-home postpartum checkups (BP, bleeding, incision checks, edema, vitals)</li>
-                                <li>C-section incision monitoring</li>
-                                <li>Breastfeeding support + referrals if needed</li>
-                                <li>Newborn care education</li>
-                                <li>Postpartum mental health screening</li>
-                                <li>Nutrition guidance for healing and milk supply</li>
-                            </ul>
-                        </div>
-                        <div class="service-card">
-                            <h3>Virtual Primary Care</h3>
-                            <p class="service-location">Available in TX, NM, UT, AZ, NV</p>
-                            <ul>
-                                <li>Sick visits</li>
-                                <li>Chronic disease management</li>
-                                <li>Medication refills</li>
-                                <li>Preventive care</li>
-                            </ul>
-                        </div>
-                        <div class="service-card">
-                            <h3>Weight Loss & Wellness</h3>
-                            <p class="service-location">Holistic weight management</p>
-                            <ul>
-                                <li>Medication-assisted weight loss</li>
-                                <li>Nutrition plans</li>
-                                <li>Lifestyle coaching</li>
-                                <li>Intermittent fasting guidance</li>
-                                <li>Personalized lab reviews</li>
-                            </ul>
-                        </div>
+                    <div class="service-card">
+                        <h3>Virtual Primary Care</h3>
+                        <p class="service-location">Available in TX, NM, UT, AZ, NV</p>
+                        <ul>
+                            <li>Sick visits</li>
+                            <li>Chronic disease management</li>
+                            <li>Medication refills</li>
+                            <li>Preventive care</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <h3>Weight Loss & Wellness</h3>
+                        <p class="service-location">Holistic weight management</p>
+                        <ul>
+                            <li>Medication-assisted weight loss</li>
+                            <li>Nutrition plans</li>
+                            <li>Lifestyle coaching</li>
+                            <li>Intermittent fasting guidance</li>
+                            <li>Personalized lab reviews</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1037,6 +1045,16 @@
                         <div class="about-text">
                             <p>A Family Nurse Practitioner passionate about postpartum care, women's health, and holistic wellness.</p>
                             <p>With years of clinical experience in primary care and women's health, I created Bright Bloom Wellness to fill the gap mothers often face after delivery — when they are discharged early, overwhelmed at home, and expected to recover without support.</p>
+                            <div class="about-focus" style="margin-top: 1.5rem;">
+                                <h3>I provide compassionate, culturally attuned postpartum care with a focus on:</h3>
+                                <ul>
+                                    <li>Preventing complications</li>
+                                    <li>Supporting physical & emotional healing</li>
+                                    <li>Educating and empowering mothers</li>
+                                    <li>Reducing unnecessary ER visits</li>
+                                    <li>Helping women transition confidently into motherhood</li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="about-image-container">
                             <div class="provider-image"></div>
@@ -1045,20 +1063,6 @@
                                 <span class="credentials">MSN, APRN, FNP-BC</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="about-focus" style="margin-top: 2rem;">
-                        <h3>I provide compassionate, culturally attuned postpartum care with a focus on:</h3>
-                        <ul>
-                            <li>Preventing complications</li>
-                            <li>Supporting physical & emotional healing</li>
-                            <li>Educating and empowering mothers</li>
-                            <li>Reducing unnecessary ER visits</li>
-                            <li>Helping women transition confidently into motherhood</li>
-                        </ul>
-                    </div>
-                    <div style="text-align: center; margin-top: 3rem;">
-                        <p style="font-size: 1.2rem; font-weight: 600; color: #ff6b35;">You don't have to do postpartum alone.</p>
-                        <p style="font-size: 1.1rem; margin-top: 0.5rem;">I'm here to walk with you every step of the way.</p>
                     </div>
                 </div>
             </div>
