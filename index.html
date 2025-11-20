@@ -51,10 +51,26 @@
         }
 
         .c-header__logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff6b35;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .c-header__logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-placeholder {
+            height: 50px;
+            width: 150px;
+            background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .c-header__menu ul {
@@ -75,18 +91,7 @@
         }
 
         .c-header__button {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .c-header__button-phone {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #333;
-            text-decoration: none;
-            font-weight: 600;
+            margin-left: auto;
         }
 
         .btn {
@@ -439,6 +444,103 @@
             resize: vertical;
         }
 
+        .form-group input:invalid,
+        .form-group textarea:invalid {
+            border-color: #ddd;
+        }
+
+        .form-group input:valid,
+        .form-group textarea:valid {
+            border-color: #4caf50;
+        }
+
+        .captcha-container {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+
+        .captcha-container label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .captcha-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .captcha-container.verified {
+            border-color: #4caf50;
+            background-color: #e8f5e9;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn:disabled:hover {
+            background-color: #ccc;
+        }
+
+        .services-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #ff6b35;
+        }
+
+        .service-card h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .service-card .service-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .service-card li {
+            padding: 0.4rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .service-card li:before {
+            content: "•";
+            color: #ff6b35;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
         /* About Section */
         .about-section {
             background-color: #f8f9fa;
@@ -655,7 +757,9 @@
             <div class="row">
                 <div class="c-header">
                     <div class="c-header__logo">
-                        <a href="#" style="color: #ff6b35; text-decoration: none;">Bright Bloom Wellness</a>
+                        <a href="#">
+                            <div class="logo-placeholder">[Logo]</div>
+                        </a>
                     </div>
                     <div class="c-header__menu">
                         <ul>
@@ -680,7 +784,7 @@
                     <div class="img-placeholder">[Image: Postpartum Care]</div>
                     <div class="u-col">
                         <h1 class="c-page-header__title">Postpartum & Women's Wellness Care</h1>
-                        <a href="#contact" class="btn btn--uppercase btn--orange">Book Consultation</a>
+                        <a href="https://calendly.com/placeholder" target="_blank" class="btn btn--uppercase btn--orange">Book Consultation</a>
                     </div>
                 </div>
             </div>
@@ -837,7 +941,7 @@
                     </div>
                     <div class="u-col u-col--right">
                         <div class="c-help__buttons">
-                            <a href="#contact" class="btn btn--blue">Schedule Consultation</a>
+                            <a href="https://calendly.com/placeholder" target="_blank" class="btn btn--blue">Schedule Consultation</a>
                             <a href="#contact" class="btn btn--blue">Ask a Question</a>
                         </div>
                     </div>
@@ -853,69 +957,39 @@
                         <h2 class="c-section-heading__title">What We Offer</h2>
                         <hr class="u-border u-border--orange">
                     </div>
-                    <div class="u-cols">
-                        <div class="u-col u-col--half u-col--left">
-                            <div class="c-editor">
-                                <h3 style="color: #ff6b35; margin-bottom: 1rem;">Postpartum In-Home Care</h3>
-                                <p style="color: #666; margin-bottom: 1rem;"><strong>DFW Only — Virtual in TX, NM, UT, AZ, NV</strong></p>
-                                <ul style="list-style: none; padding-left: 0;">
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        In-home postpartum checkups (BP, bleeding, incision checks, edema, vitals)
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        C-section incision monitoring
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Breastfeeding support + referrals if needed
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Newborn care education
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Postpartum mental health screening
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Nutrition guidance for healing and milk supply
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="services-compact">
+                        <div class="service-card">
+                            <h3>Postpartum In-Home Care</h3>
+                            <p class="service-location">DFW Only — Virtual in TX, NM, UT, AZ, NV</p>
+                            <ul>
+                                <li>In-home postpartum checkups (BP, bleeding, incision checks, edema, vitals)</li>
+                                <li>C-section incision monitoring</li>
+                                <li>Breastfeeding support + referrals if needed</li>
+                                <li>Newborn care education</li>
+                                <li>Postpartum mental health screening</li>
+                                <li>Nutrition guidance for healing and milk supply</li>
+                            </ul>
                         </div>
-                        <div class="u-col u-col--half u-col--right">
-                            <div class="c-editor">
-                                <h3 style="color: #ff6b35; margin-bottom: 1rem;">Additional Services</h3>
-                                <ul style="list-style: none; padding-left: 0;">
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Weight loss & wellness services
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Virtual primary care (TX, NM, UT, AZ, NV)
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Sick visits
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Chronic disease management
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Medication refills
-                                    </li>
-                                    <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
-                                        <span style="position: absolute; left: 0; color: #ff6b35;">•</span>
-                                        Preventive care
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="service-card">
+                            <h3>Virtual Primary Care</h3>
+                            <p class="service-location">Available in TX, NM, UT, AZ, NV</p>
+                            <ul>
+                                <li>Sick visits</li>
+                                <li>Chronic disease management</li>
+                                <li>Medication refills</li>
+                                <li>Preventive care</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h3>Weight Loss & Wellness</h3>
+                            <p class="service-location">Holistic weight management</p>
+                            <ul>
+                                <li>Medication-assisted weight loss</li>
+                                <li>Nutrition plans</li>
+                                <li>Lifestyle coaching</li>
+                                <li>Intermittent fasting guidance</li>
+                                <li>Personalized lab reviews</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -950,30 +1024,6 @@
             </div>
         </div>
 
-        <!-- Service Areas -->
-        <div class="c-text u-mg u-mg--sm">
-            <div class="container container--pd">
-                <div class="row">
-                    <div class="c-section-heading">
-                        <span class="c-section-heading__uptitle">Service Areas</span>
-                        <h2 class="c-section-heading__title">Where We Serve</h2>
-                        <hr class="u-border u-border--orange">
-                    </div>
-                    <div class="u-cols">
-                        <div class="u-col u-col--half u-col--left">
-                            <div class="c-editor">
-                                <p><strong>📍 In-Home Care:</strong> Dallas–Fort Worth</p>
-                            </div>
-                        </div>
-                        <div class="u-col u-col--half u-col--right">
-                            <div class="c-editor">
-                                <p><strong>🌐 Virtual Care:</strong> Texas, New Mexico, Utah, Arizona, Nevada</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- About Section -->
         <div class="c-text u-mg u-mg--sm about-section" id="about">
@@ -1021,7 +1071,7 @@
                     <div class="c-section-heading">
                         <h2 class="c-section-heading__title">You deserve support. You deserve rest. You deserve to bloom.</h2>
                         <p style="font-size: 1.2rem; margin-top: 1rem;">👉 Book your postpartum consultation today.</p>
-                        <a href="#contact" class="btn btn--orange" style="margin-top: 1.5rem;">Book Consultation</a>
+                        <a href="https://calendly.com/placeholder" target="_blank" class="btn btn--orange" style="margin-top: 1.5rem;">Book Consultation</a>
                     </div>
                 </div>
             </div>
@@ -1050,7 +1100,7 @@
                                 <div class="c-editor">
                                     <p>Have a question about our services or want to schedule a consultation? Fill out the form below, and we'll get back to you as soon as possible.</p>
                                 </div>
-                                <form style="margin-top: 1.5rem;">
+                                <form id="contactForm" style="margin-top: 1.5rem;">
                                     <div class="form-group">
                                         <label for="name">Your Name *</label>
                                         <input type="text" id="name" name="name" required placeholder="Your Name">
@@ -1071,8 +1121,61 @@
                                         <label for="message">How can we help? *</label>
                                         <textarea id="message" name="message" required placeholder="Tell us about your needs..."></textarea>
                                     </div>
-                                    <button type="submit" class="btn">Send Message</button>
+                                    <div class="captcha-container" id="captchaContainer">
+                                        <label>
+                                            <input type="checkbox" id="captcha" name="captcha" required>
+                                            <span>I'm not a robot</span>
+                                        </label>
+                                    </div>
+                                    <button type="submit" id="submitBtn" class="btn" disabled>Send Message</button>
                                 </form>
+                                <script>
+                                    const form = document.getElementById('contactForm');
+                                    const captcha = document.getElementById('captcha');
+                                    const submitBtn = document.getElementById('submitBtn');
+                                    const captchaContainer = document.getElementById('captchaContainer');
+                                    const inputs = form.querySelectorAll('input[required], textarea[required]');
+
+                                    function validateForm() {
+                                        let isValid = true;
+                                        inputs.forEach(input => {
+                                            if (input.type !== 'checkbox' && !input.value.trim()) {
+                                                isValid = false;
+                                            }
+                                        });
+                                        
+                                        if (!captcha.checked) {
+                                            isValid = false;
+                                        }
+                                        
+                                        submitBtn.disabled = !isValid;
+                                    }
+
+                                    inputs.forEach(input => {
+                                        input.addEventListener('input', validateForm);
+                                        input.addEventListener('change', validateForm);
+                                    });
+
+                                    captcha.addEventListener('change', function() {
+                                        validateForm();
+                                        if (this.checked) {
+                                            captchaContainer.classList.add('verified');
+                                        } else {
+                                            captchaContainer.classList.remove('verified');
+                                        }
+                                    });
+
+                                    form.addEventListener('submit', function(e) {
+                                        e.preventDefault();
+                                        if (submitBtn.disabled) {
+                                            return;
+                                        }
+                                        alert('Thank you for your message! We will get back to you soon.');
+                                        form.reset();
+                                        captchaContainer.classList.remove('verified');
+                                        submitBtn.disabled = true;
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -1111,7 +1214,7 @@
                         <ul>
                             <li>Phone: <a href="tel:+1234567890">(xxx) xxx-xxxx</a></li>
                             <li>Email: <a href="mailto:info@brightbloomwellness.com">info@brightbloomwellness.com</a></li>
-                            <li><a href="#contact">Book Consultation</a></li>
+                            <li><a href="https://calendly.com/placeholder" target="_blank">Book Consultation</a></li>
                         </ul>
                     </div>
                 </div>
