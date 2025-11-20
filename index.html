@@ -46,13 +46,15 @@
         .c-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 1rem 0;
-            position: relative;
+            gap: 2rem;
         }
 
         .c-header__logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .c-header__logo img {
@@ -74,15 +76,17 @@
         }
 
         .c-header__menu {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            flex: 1;
+            display: flex;
+            justify-content: center;
         }
 
         .c-header__menu ul {
             display: flex;
             list-style: none;
             gap: 2rem;
+            margin: 0;
+            padding: 0;
         }
 
         .c-header__menu a {
@@ -90,14 +94,43 @@
             color: #333;
             font-weight: 500;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .c-header__menu a:hover {
             color: #ff6b35;
         }
 
+        .c-header__contact {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .c-header__phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .c-header__phone:hover {
+            color: #ff6b35;
+        }
+
+        .c-header__phone-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
         .c-header__button {
-            margin-left: auto;
+            margin: 0;
         }
 
         .btn {
@@ -450,13 +483,13 @@
             resize: vertical;
         }
 
-        .form-group input:invalid,
-        .form-group textarea:invalid {
-            border-color: #ddd;
+        .form-group input:invalid:not(:placeholder-shown),
+        .form-group textarea:invalid:not(:placeholder-shown) {
+            border-color: #f44336;
         }
 
-        .form-group input:valid,
-        .form-group textarea:valid {
+        .form-group input:valid:not(:placeholder-shown),
+        .form-group textarea:valid:not(:placeholder-shown) {
             border-color: #4caf50;
         }
 
@@ -731,13 +764,17 @@
             }
 
             .c-header__menu {
-                position: static;
-                transform: none;
+                order: 2;
             }
 
             .c-header__menu ul {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .c-header__contact {
+                order: 3;
+                align-items: center;
             }
 
             .c-page-header__title {
@@ -778,8 +815,16 @@
                             <li><a href="#about">About</a></li>
                         </ul>
                     </div>
-                    <div class="c-header__button">
-                        <a href="#contact" class="btn btn--white">Contact</a>
+                    <div class="c-header__contact">
+                        <a href="tel:+1234567890" class="c-header__phone">
+                            <svg class="c-header__phone-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+                            </svg>
+                            (xxx) xxx-xxxx
+                        </a>
+                        <div class="c-header__button">
+                            <a href="#contact" class="btn btn--white">Contact</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1119,7 +1164,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone">Phone Number *</label>
-                                        <input type="tel" id="phone" name="phone" required placeholder="Phone Number">
+                                        <input type="tel" id="phone" name="phone" required pattern="[0-9\s\-\(\)]+" placeholder="Phone Number" title="Please enter a valid phone number">
                                     </div>
                                     <div class="form-group">
                                         <label for="message">How can we help? *</label>
@@ -1131,55 +1176,8 @@
                                             <span>I'm not a robot</span>
                                         </label>
                                     </div>
-                                    <button type="submit" id="submitBtn" class="btn" disabled>Send Message</button>
+                                    <button type="submit" class="btn">Send Message</button>
                                 </form>
-                                <script>
-                                    const form = document.getElementById('contactForm');
-                                    const captcha = document.getElementById('captcha');
-                                    const submitBtn = document.getElementById('submitBtn');
-                                    const captchaContainer = document.getElementById('captchaContainer');
-                                    const inputs = form.querySelectorAll('input[required], textarea[required]');
-
-                                    function validateForm() {
-                                        let isValid = true;
-                                        inputs.forEach(input => {
-                                            if (input.type !== 'checkbox' && !input.value.trim()) {
-                                                isValid = false;
-                                            }
-                                        });
-                                        
-                                        if (!captcha.checked) {
-                                            isValid = false;
-                                        }
-                                        
-                                        submitBtn.disabled = !isValid;
-                                    }
-
-                                    inputs.forEach(input => {
-                                        input.addEventListener('input', validateForm);
-                                        input.addEventListener('change', validateForm);
-                                    });
-
-                                    captcha.addEventListener('change', function() {
-                                        validateForm();
-                                        if (this.checked) {
-                                            captchaContainer.classList.add('verified');
-                                        } else {
-                                            captchaContainer.classList.remove('verified');
-                                        }
-                                    });
-
-                                    form.addEventListener('submit', function(e) {
-                                        e.preventDefault();
-                                        if (submitBtn.disabled) {
-                                            return;
-                                        }
-                                        alert('Thank you for your message! We will get back to you soon.');
-                                        form.reset();
-                                        captchaContainer.classList.remove('verified');
-                                        submitBtn.disabled = true;
-                                    });
-                                </script>
                             </div>
                         </div>
                     </div>
