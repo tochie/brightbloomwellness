@@ -760,6 +760,8 @@
       var API_BASE = qsApi || (function () {
         try { return localStorage.getItem('intake_api'); } catch (e) { return null; }
       })() || 'http://localhost:8000';
+      // ngrok free-tier serves an interstitial page unless this header is present; harmless elsewhere.
+      var API_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' };
 
       /* =========================================================
          BOOKING FORM → POST /intake (falls back to call-us copy
@@ -818,7 +820,7 @@
 
           fetch(API_BASE + '/intake', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: API_HEADERS,
             body: JSON.stringify({ form: payload })
           }).then(function (r) { return r.json(); }).then(function (job) {
             if (job.state === 'NEEDS_REVIEW') {
@@ -877,7 +879,7 @@
       function startSession() {
         busy = true;
         var typing = addMsg('agent chat-msg--typing', '…');
-        fetch(API_BASE + '/chat/start', { method: 'POST' })
+        fetch(API_BASE + '/chat/start', { method: 'POST', headers: API_HEADERS })
           .then(function (r) { return r.json(); })
           .then(function (j) {
             sessionId = j.session_id;
@@ -900,7 +902,7 @@
         var typing = addMsg('agent chat-msg--typing', '…');
         fetch(API_BASE + '/chat/message', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: API_HEADERS,
           body: JSON.stringify({ session_id: sessionId, text: text })
         }).then(function (r) { return r.json(); }).then(function (j) {
           typing.remove();
