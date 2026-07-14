@@ -683,6 +683,12 @@
         </div>
 
         <div class="form__group">
+          <label class="form__label" for="pharmacy">Preferred pharmacy</label>
+          <input class="form__control" type="text" id="pharmacy" name="pharmacy" placeholder="e.g. CVS on Main St, Albuquerque" maxlength="200">
+          <p class="form__help">Where we should send prescriptions, if needed. Optional.</p>
+        </div>
+
+        <div class="form__group">
           <label class="form__label">Payment <span class="req">*</span></label>
           <div class="form__card-placeholder">
             Secure card field — coming soon. We'll place a hold for the consultation fee; you won't be charged until your visit is complete.
@@ -810,7 +816,8 @@
             email: fd.get('email'),
             dob: fd.get('dob'),
             state: fd.get('state'),
-            reason: fd.get('reason')
+            reason: fd.get('reason'),
+            preferred_pharmacy: fd.get('pharmacy') || undefined
           };
 
           submitBtn.disabled = true;
