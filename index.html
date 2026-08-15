@@ -763,7 +763,7 @@
       if (qsApi) { try { localStorage.setItem('intake_api', qsApi); } catch (e) {} }
       var API_BASE = qsApi || (function () {
         try { return localStorage.getItem('intake_api'); } catch (e) { return null; }
-      })() || 'http://localhost:8000';
+      })() || 'https://intake-brightbloom-wellness-sizlxdcbnq-uc.a.run.app';
       // ngrok free-tier serves an interstitial page unless this header is present; harmless elsewhere.
       var API_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' };
 
