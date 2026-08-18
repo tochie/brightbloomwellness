@@ -6,6 +6,9 @@
   <title>Bright Bloom Wellness — Book a Visit with Your Nurse Practitioner</title>
   <meta name="description" content="Virtual primary care and women's wellness with Obioma Eke-Okoro, MSN, APRN, FNP-BC. Book an appointment by phone or online. Licensed in NM, UT, AZ, NV.">
   <meta name="theme-color" content="#ff6b35">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <style>
     /* =========================================================
@@ -114,11 +117,15 @@
       padding: 12px 0;
     }
     .header__logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-weight: 700;
       font-size: 1.05rem;
       color: var(--text);
       letter-spacing: -0.01em;
     }
+    .header__logo svg { width: 26px; height: 26px; flex-shrink: 0; }
     .header__logo span { color: var(--orange); }
     .header__phone {
       display: inline-flex;
@@ -577,7 +584,18 @@
   <header class="header">
     <div class="container">
       <div class="header__inner">
-        <a href="#" class="header__logo">Bright Bloom <span>Wellness</span></a>
+        <a href="#" class="header__logo">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <g fill="#ff6b35">
+              <circle cx="32" cy="18.24" r="10.56"/>
+              <circle cx="45.09" cy="27.75" r="10.56"/>
+              <circle cx="40.09" cy="43.13" r="10.56"/>
+              <circle cx="23.91" cy="43.13" r="10.56"/>
+              <circle cx="18.91" cy="27.75" r="10.56"/>
+            </g>
+            <circle cx="32" cy="32" r="8.64" fill="#e55a2b"/>
+          </svg>
+          Bright Bloom <span>Wellness</span></a>
         <a href="tel:+13252214980" class="header__phone" aria-label="Call us">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Bright Bloom Wellness — five-petal bloom mark -->
+  <g fill="#ff6b35">
+    <circle cx="32" cy="18.24" r="10.56"/>
+    <circle cx="45.09" cy="27.75" r="10.56"/>
+    <circle cx="40.09" cy="43.13" r="10.56"/>
+    <circle cx="23.91" cy="43.13" r="10.56"/>
+    <circle cx="18.91" cy="27.75" r="10.56"/>
+  </g>
+  <circle cx="32" cy="32" r="8.64" fill="#e55a2b"/>
+</svg>
