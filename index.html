@@ -774,14 +774,42 @@
     (function () {
       /* ---------------------------------------------------------
          Intake backend base URL.
-         Default: local intake_service (uvicorn intake_service.app:app).
-         Override for testing: ?intake_api=https://host:port (persisted).
+         Default: the production intake service (live Stripe keys).
+         ?mode=test  → the parallel TEST service (Stripe test keys, own DB;
+                       web form + chat only — the phone line stays on prod).
+                       Session-only, with a visible banner; ?mode=live clears it.
+         ?intake_api=https://host:port → explicit override (persisted; wins).
          --------------------------------------------------------- */
-      var qsApi = new URLSearchParams(location.search).get('intake_api');
+      var qs = new URLSearchParams(location.search);
+      var qsApi = qs.get('intake_api');
       if (qsApi) { try { localStorage.setItem('intake_api', qsApi); } catch (e) {} }
-      var API_BASE = qsApi || (function () {
+      var qsMode = qs.get('mode');
+      if (qsMode === 'test') { try { sessionStorage.setItem('intake_mode', 'test'); } catch (e) {} }
+      if (qsMode === 'live') { try { sessionStorage.removeItem('intake_mode'); } catch (e) {} }
+      var TEST_MODE = (function () {
+        try { return sessionStorage.getItem('intake_mode') === 'test'; } catch (e) { return false; }
+      })();
+      var TEST_API = 'https://intake-brightbloom-wellness-test-sizlxdcbnq-uc.a.run.app';
+      var API_BASE = qsApi || (TEST_MODE ? TEST_API : null) || (function () {
         try { return localStorage.getItem('intake_api'); } catch (e) { return null; }
       })() || 'https://intake-brightbloom-wellness-sizlxdcbnq-uc.a.run.app';
+      if (TEST_MODE) {
+        // Top banner (bottom is taken by the sticky mobile CTA bar); the sticky
+        // header slides down by the banner's height so nothing is covered.
+        var tb = document.createElement('div');
+        tb.textContent = 'TEST MODE — intakes and payments are practice runs (Stripe test cards only; no real charges). Add ?mode=live to the address to exit.';
+        tb.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#b45309;color:#fff;' +
+          'font:600 13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:8px 14px;';
+        document.body.appendChild(tb);
+        var hdr = document.querySelector('.header');
+        var padForBanner = function () {
+          var h = tb.offsetHeight;
+          document.body.style.paddingTop = h + 'px';
+          if (hdr) hdr.style.top = h + 'px';
+        };
+        padForBanner();
+        window.addEventListener('resize', padForBanner);
+      }
       // ngrok free-tier serves an interstitial page unless this header is present; harmless elsewhere.
       var API_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' };
 
