@@ -778,11 +778,15 @@
          ?mode=test  → the parallel TEST service (Stripe test keys, own DB;
                        web form + chat only — the phone line stays on prod).
                        Session-only, with a visible banner; ?mode=live clears it.
-         ?intake_api=https://host:port → explicit override (persisted; wins).
+         ?intake_api=https://host:port → explicit override (session-only; wins).
          --------------------------------------------------------- */
       var qs = new URLSearchParams(location.search);
       var qsApi = qs.get('intake_api');
-      if (qsApi) { try { localStorage.setItem('intake_api', qsApi); } catch (e) {} }
+      // Override is session-scoped: ngrok tunnel URLs rotate on every restart,
+      // and a localStorage-persisted one kept pointing the widget at a dead
+      // tunnel long after testing ended. Also drop any legacy stored value.
+      try { localStorage.removeItem('intake_api'); } catch (e) {}
+      if (qsApi) { try { sessionStorage.setItem('intake_api', qsApi); } catch (e) {} }
       var qsMode = qs.get('mode');
       if (qsMode === 'test') { try { sessionStorage.setItem('intake_mode', 'test'); } catch (e) {} }
       if (qsMode === 'live') { try { sessionStorage.removeItem('intake_mode'); } catch (e) {} }
@@ -791,7 +795,7 @@
       })();
       var TEST_API = 'https://intake-brightbloom-wellness-test-sizlxdcbnq-uc.a.run.app';
       var API_BASE = qsApi || (TEST_MODE ? TEST_API : null) || (function () {
-        try { return localStorage.getItem('intake_api'); } catch (e) { return null; }
+        try { return sessionStorage.getItem('intake_api'); } catch (e) { return null; }
       })() || 'https://intake-brightbloom-wellness-sizlxdcbnq-uc.a.run.app';
       if (TEST_MODE) {
         // Top banner (bottom is taken by the sticky mobile CTA bar); the sticky
