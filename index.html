@@ -717,8 +717,10 @@
 
         <div class="form__group">
           <label class="form__label">Payment <span class="req">*</span></label>
-          <div class="form__card-placeholder">
-            Secure card field — coming soon. We'll place a hold for the consultation fee; you won't be charged until your visit is complete.
+          <!-- Fee amount is bound at runtime from GET /clinic/public-config (see
+               script below) — never hardcoded. Generic wording until it loads. -->
+          <div class="form__card-placeholder" id="payTerms">
+            Visit fee — your card is authorized when you book and charged only after your visit is complete. We&rsquo;ll send a secure payment link to finish booking.
           </div>
         </div>
 
@@ -825,6 +827,37 @@
       }
       // ngrok free-tier serves an interstitial page unless this header is present; harmless elsewhere.
       var API_HEADERS = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' };
+
+      /* ---------------------------------------------------------
+         RUNTIME FEE BINDING — the consult fee is a config setting in the
+         clinic bundle, served by GET /clinic/public-config. The amount is
+         NEVER hardcoded in this page; if the fetch fails we keep the
+         generic (amount-free) wording above.
+         --------------------------------------------------------- */
+      (function bindFee() {
+        var el = document.getElementById('payTerms');
+        if (!el) return;
+        function render(amountText) {
+          el.textContent = (amountText ? 'Visit fee: ' + amountText + ' \u2014 '
+                                       : 'Visit fee \u2014 ') +
+            'your card is authorized when you book and charged only after your ' +
+            'visit is complete. We\u2019ll send a secure payment link to finish booking.';
+        }
+        fetch(API_BASE + '/clinic/public-config', { headers: API_HEADERS })
+          .then(function (r) { return r.json(); })
+          .then(function (cfg) {
+            var p = (cfg && cfg.payment) || {};
+            var cents = Number(p.amount_cents);
+            if (p.required && Number.isFinite(cents) && cents > 0) {
+              var cur = String(p.currency || 'usd').toUpperCase();
+              try {
+                render(new Intl.NumberFormat('en-US', { style: 'currency', currency: cur })
+                  .format(cents / 100));
+              } catch (e) { render(null); }
+            } else { render(null); }
+          })
+          .catch(function () { render(null); });
+      })();
 
       /* =========================================================
          BOOKING FORM → POST /intake (falls back to call-us copy
